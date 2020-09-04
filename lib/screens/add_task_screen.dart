@@ -1,53 +1,56 @@
 import 'package:flutter/material.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  // final Function addTaskCallback;
+class AddTaskScreen extends StatelessWidget {
+  final Function addTaskCallback;
 
-  // const AddTaskScreen(this.addTaskCallback);
+  const AddTaskScreen(this.addTaskCallback);
 
-  @override
-  _AddTaskScreenState createState() => _AddTaskScreenState();
-}
-
-class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
-    String newTaskTitle = "";
+    String newTaskTitle = '';
 
-    return Scaffold(
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Add Task',
-                textAlign: TextAlign.center,
+    return Container(
+      color: Color(0xff757575),
+      child: Container(
+        padding: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              'Add Task',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30.0,
+                color: Colors.lightBlueAccent,
+              ),
+            ),
+            TextField(
+              autofocus: true,
+              textAlign: TextAlign.center,
+              onChanged: (newText) {
+                newTaskTitle = newText;
+              },
+            ),
+            FlatButton(
+              child: Text(
+                'Add',
                 style: TextStyle(
-                  color: Colors.lightBlueAccent,
-                  fontSize: 40.0,
+                  color: Colors.white,
                 ),
               ),
-              TextField(
-                autofocus: true,
-                textAlign: TextAlign.center,
-                onChanged: (newText) {
-                  newTaskTitle = newText;
-                  print('onChanged $newText');
-                },
-              ),
-              Text(newTaskTitle),
-              FlatButton(
-                onPressed: () {
-                  print(newTaskTitle);
-                },
-                color: Colors.lightBlueAccent,
-                child: Text('add task'),
-                textColor: Colors.white,
-              ),
-            ],
-          ),
+              color: Colors.lightBlueAccent,
+              onPressed: () {
+                addTaskCallback(newTaskTitle);
+              },
+            ),
+          ],
         ),
       ),
     );

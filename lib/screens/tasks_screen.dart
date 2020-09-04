@@ -25,11 +25,19 @@ class _TasksScreenState extends State<TasksScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(
-                //   (newTaskTitle) {
-                //   print(newTaskTitle);
-                // }
-                ),
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen((newTaskTitle) {
+                  setState(() {
+                    tasks.add(Task(name: newTaskTitle));
+                  });
+                  Navigator.pop(context);
+                }),
+              ),
+            ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.0),
@@ -70,7 +78,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     ),
                   ),
                   Text(
-                    '12 tasks',
+                    '${tasks.length} tasks',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30.0,
