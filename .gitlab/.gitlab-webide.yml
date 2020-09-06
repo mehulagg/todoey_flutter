@@ -1,2 +1,5 @@
 terminal:
     image: matspfeiffer/flutter:beta
+    before_script:
+    - apt-get update
+    script: sleep 60
