@@ -1,19 +1,11 @@
-image: jonyg13/gitpod_flutter:latest
+image: cirrusci/flutter:beta
 tasks:
-  - before: >
-      source ~/.bashrc
-    init: |
-      echo "Wait for the installation"
-      yes | sdk i java 8.0.232-open
-      sdk i kotlin
-      sdkmanager --update
-      yes | sdkmanager --licenses
+  - command: >
       flutter pub get
-    command: >
       echo "Ready!"
 
 ports:
-  - port: 8080
+  - port: 3000
     onOpen: open-preview
   - port: 5037
     onOpen: ignore
