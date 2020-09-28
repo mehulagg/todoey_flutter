@@ -1,4 +1,5 @@
-image: cirrusci/flutter:beta
+image:
+  file: .gitpod.Dockerfile
 tasks:
   - command: >
       flutter pub get
